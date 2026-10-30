@@ -15,18 +15,23 @@ command -v pi >/dev/null 2>&1 || { echo "ERREUR : 'pi' introuvable dans PATH (WS
 
 echo "== 1/5 config pi piban -> $PI_DIR"
 mkdir -p "$PI_DIR"
-cp -a "$SRC/agent-dir/." "$PI_DIR/"
-
-echo "== 2/5 paquetages pi (pi-subagents, pi-web-access)"
-(cd "$PI_DIR/npm" && npm install --no-fund --no-audit --loglevel=error)
+if [ -f "$PI_DIR/.piban-migration-imported" ]; then
+  echo "déjà importé — étapes 1-2 sautées"
+else
+  cp -a "$SRC/agent-dir/." "$PI_DIR/"
+  echo "== 2/5 paquetages pi (pi-subagents, pi-web-access)"
+  (cd "$PI_DIR/npm" && npm install --no-fund --no-audit --loglevel=error)
+  touch "$PI_DIR/.piban-migration-imported"
+fi
 
 echo "== 3/5 repo piban -> $P"
 mkdir -p "$PROJECTS_ROOT"
 if [ -d "$P/.git" ]; then
   echo "piban déjà cloné ici — pull seulement"
-  (cd "$P" && git checkout dev-piban && git pull)
+  (cd "$P" && git checkout dev-piban 2>/dev/null || git checkout -b dev-piban master && git pull origin master --ff-only)
 else
-  git clone -b dev-piban git@github.com:pb0kaoss-create/piban.git "$P"
+  git clone git@github.com:pb0kaoss-create/piban.git "$P"
+  (cd "$P" && git checkout -b dev-piban)
 fi
 (cd "$P" && npm ci --no-fund --no-audit --loglevel=error)
 (cd "$P" && npm run build --silent)
