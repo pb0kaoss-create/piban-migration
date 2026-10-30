@@ -11,7 +11,11 @@ SRC="$(cd "$(dirname "$0")" && pwd)/export"
 P="$PROJECTS_ROOT/piban"
 
 command -v pi >/dev/null 2>&1 || { echo "ERREUR : 'pi' introuvable dans PATH (WSL)."; exit 1; }
-[ -d "$PI_DIR" ] && { echo "ERREUR : $PI_DIR existe déjà — import non idempotent, inspecte avant de relancer."; exit 1; }
+if [ -d "$PI_DIR" ] && [ ! -f "$PI_DIR/.piban-migration-imported" ]; then
+  echo "ERREUR : $PI_DIR existe sans marker d'import — import interrompu ?" >&2
+  echo "Inspecte le dossier, puis soit supprime-le pour repartir à zéro, soit crée le marker : touch $PI_DIR/.piban-migration-imported" >&2
+  exit 1
+fi
 
 echo "== 1/5 config pi piban -> $PI_DIR"
 mkdir -p "$PI_DIR"
