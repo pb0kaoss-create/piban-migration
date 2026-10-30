@@ -1,0 +1,28 @@
+{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "llama-win": {
+      "baseUrl": "http://127.0.0.1:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "none",
+      "models": [
+        {
+          "id": "qwen3.8-27b",
+          "name": "Qwen3.8 27B (local)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 98304,
+          "maxTokens": 32768
+        },
+        {
+          "id": "flint",
+          "name": "Flint 40B-A2.5B (local)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 98304,
+          "maxTokens": 49152
+        }
+      ]
+    }
+  }
+}

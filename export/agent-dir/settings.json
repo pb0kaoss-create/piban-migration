@@ -1,0 +1,21 @@
+{
+  "defaultTools": [
+    "+codemode"
+  ],
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 24576,
+    "keepRecentTokens": 20000
+  },
+  "lastChangelogVersion": "1.4.0",
+  "defaultProvider": "llama-win",
+  "defaultModel": "qwen3.8-27b",
+  "hideThinkingBlock": false,
+  "packages": [
+    "npm:pi-subagents",
+    "npm:pi-web-access"
+  ],
+  "skills": [
+    "-~/.agents/skills"
+  ]
+}

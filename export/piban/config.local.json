@@ -1,0 +1,6 @@
+{
+  "port": 18787,
+  "projectsRoot": "/mnt/e/dev/projets",
+  "launch": { "mode": "wt" },
+  "tty": { "retentionMs": 120000 }
+}
