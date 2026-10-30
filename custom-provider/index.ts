@@ -15,7 +15,7 @@
  *     🟢 n modèle(s)            → provider joignable et clé acceptée
  *     🟡 clé absente            → aucune clé connue : la saisir via `/login`
  *     🔴 clé refusée            → la clé existe mais est rejetée (refaire /login)
- *     🔴 injoignable            → réseau, panne, maintenance
+ *     🔴 injoignable            → réseau interne inaccessible ou maintenance
  *
  *   Conséquence utile : le Stack IA GB10 est un provider INTERNE, joignable
  *   seulement depuis le réseau de l'organisation. 🔴 hors de ce réseau n'est pas
@@ -528,7 +528,7 @@ export default async function (pi: ExtensionAPI) {
       case "denied":
         return `${entete} 🔴 clé refusée — refaire /login`;
       default:
-        return `${entete} 🔴 injoignable (maintenance ?)`;
+        return `${entete} 🔴 injoignable (réseau interne ou maintenance)`;
     }
   });
 
