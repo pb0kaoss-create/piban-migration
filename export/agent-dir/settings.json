@@ -8,14 +8,14 @@
     "keepRecentTokens": 20000
   },
   "lastChangelogVersion": "1.4.0",
-  "defaultProvider": "llama-win",
-  "defaultModel": "qwen3.8-27b",
+  "defaultProvider": "stack-ia-gb10",
+  "defaultModel": "deepseek-v4-flash-vision",
   "hideThinkingBlock": false,
   "packages": [
     "npm:pi-subagents",
     "npm:pi-web-access"
   ],
   "skills": [
-    "-~/.agents/skills"
+    "-~/.agents/skills/*"
   ]
 }

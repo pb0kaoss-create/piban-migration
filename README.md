@@ -12,13 +12,18 @@ Les `node_modules`, `sessions/` (historique) et caches ne sont pas transportés 
 export/
   agent-dir/          → sera copié tel quel dans ~/.pi/agent-piban/
     AGENTS.md, APPEND_SYSTEM.md, profile.md, reflexes.md
-    settings.json     (déjà adapté : exclusion du ~/.agents/skills partagé)
-    models.json       (définitions providers/modèles — provider local llama-win inclus,
-                       à adapter au bureau si tu n'y tournes pas de LLM local)
+    settings.json     (déjà adapté : exclusion du ~/.agents/skills partagé ; défaut
+                       stack-ia-gb10 / deepseek-v4-flash-vision)
+    models.json       (vide : AUCUN provider ne vient de la machine d'origine)
     npm/package.json  (pi-subagents, pi-web-access — installé par import.sh)
-    extensions/       (kilo.ts, orca-agent-status.ts, session-shutdown.ts,
+    extensions/       (kilo.ts, orca-agent-status.ts, session-shutdown.ts, custom-provider/,
                        piban.config.json — repoRoot patché par import.sh)
-    skills/           (lot de skills COMPLET de la machine d'origine, privé au pi piban)
+    skills/           (lot de skills COMPLET, privé au pi piban)
+
+  Providers : seuls ceux de l'org sont pré-paramétrés, via l'extension `custom-provider`
+  (Stack IA GB10, Kilo Gateway, Albert API). Leur clé API se saisit au 1er lancement
+  via `/login` ; rien n'est importé depuis la machine d'origine, et l'utilisateur reste
+  libre d'enregistrer d'autres providers avec `/login` après.
   piban/
     config.local.json (template — projectsRoot patché par import.sh)
 import.sh             → à exécuter sur la machine cible

@@ -13,13 +13,15 @@ Exceptions :
 - Si le user a déjà validé un modèle dans la session, le réutiliser pour la même tâche ne demande pas de re-validation.
 - Toujours afficher le coût réel (`usage`) après l'appel.
 
-## Budget contexte (modèle local 98K)
+## Budget contexte (poste de bureau — contrainte 98K levée)
 
-Éviter l'auto-compaction (seuil ~24K tokens restants) :
+Le poste de travail actuel a un contexte plus large ; la contrainte stricte du modèle local 98K (éviter l'auto-compaction sous ~24K) ne s'applique plus.
 
-- Découper le travail : **une unité de décision/ticket par session** ; finir une session nette au lieu de gonfler.
-- Réponses courtes ; pas de ré-exploration (se fier aux notes/état persisté sur disque).
-- Lectures ciblées (`grep -n`, `sed -n 'a,bp'`, `read` avec offset/limit) ; jamais de `cat`/`ls -R`/`find` massifs dans le contexte.
+Les bonnes pratiques de sobriété restent recommandées, sans seuil impératif :
+
+- Une unité de décision/ticket par session reste confortable ; finir une session nette plutôt que gonfler.
+- Réponses courtes ; pas de ré-exploration inutile (se fier aux notes/état persisté sur disque).
+- Lectures ciblées (`grep -n`, `sed -n 'a,bp'`, `read` avec offset/limit) plutôt que `cat`/`ls -R`/`find` massifs.
 - Les gros artefacts vont dans des fichiers, pas dans la conversation.
 
 ## Thinking level adaptatif
